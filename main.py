@@ -5,7 +5,6 @@ import os
 import pwd
 import shutil
 import time
-from dataclasses import dataclass
 
 import decky
 
@@ -24,25 +23,38 @@ DISCOVERY_POLL_SECONDS = 2.0
 DISCOVERY_POLL_INTERVAL_SECONDS = 0.2
 
 
-@dataclass
 class SessionContext:
-    busctl_path: str
-    systemctl_path: str | None
-    env: dict[str, str]
+    def __init__(
+        self,
+        *,
+        busctl_path: str,
+        systemctl_path: str | None,
+        env: dict[str, str],
+    ) -> None:
+        self.busctl_path = busctl_path
+        self.systemctl_path = systemctl_path
+        self.env = env
 
 
-@dataclass
 class DeviceInfo:
-    object_path: str
-    active: bool
+    def __init__(self, *, object_path: str, active: bool) -> None:
+        self.object_path = object_path
+        self.active = active
 
 
-@dataclass
 class CommandResult:
-    args: tuple[str, ...]
-    returncode: int
-    stdout: str
-    stderr: str
+    def __init__(
+        self,
+        *,
+        args: tuple[str, ...],
+        returncode: int,
+        stdout: str,
+        stderr: str,
+    ) -> None:
+        self.args = args
+        self.returncode = returncode
+        self.stdout = stdout
+        self.stderr = stderr
 
 
 class CecError(Exception):
@@ -208,6 +220,21 @@ class Plugin:
             raise CecError("User session bus unavailable")
 
         env = os.environ.copy()
+        for key in (
+            "LD_LIBRARY_PATH",
+            "PYTHONHOME",
+            "PYTHONPATH",
+            "PYTHONEXECUTABLE",
+            "PYINSTALLER_SAFE_PATH",
+            "PYINSTALLER_RESET_ENVIRONMENT",
+            "_MEIPASS2",
+            "_PYI_APPLICATION_HOME_DIR",
+            "_PYI_ARCHIVE_FILE",
+            "_PYI_PARENT_PROCESS_LEVEL",
+            "_PYI_LINUX_PROCESS_NAME",
+        ):
+            env.pop(key, None)
+
         env.update(
             {
                 "HOME": user_entry.pw_dir,

@@ -34,6 +34,24 @@ const ACTIONS: Record<ActionName, () => Promise<CecActionResult>> = {
   mute,
 };
 
+const RPC_TIMEOUT_MS = 5000;
+
+const withTimeout = async <T,>(promise: Promise<T>, message: string): Promise<T> => {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<T>((_, reject) => {
+        timeoutId = setTimeout(() => reject(new Error(message)), RPC_TIMEOUT_MS);
+      }),
+    ]);
+  } finally {
+    if (timeoutId !== undefined) {
+      clearTimeout(timeoutId);
+    }
+  }
+};
+
 const ACTION_LABELS: Record<ActionName, ReactNode> = {
   volume_up: (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
@@ -67,7 +85,7 @@ function Content() {
   const loadStatus = async () => {
     setStatusLoading(true);
     try {
-      const nextStatus = await getStatus();
+      const nextStatus = await withTimeout(getStatus(), "Timed out while checking CEC status");
       setStatus(nextStatus);
     } catch (error) {
       console.error("Failed to load mote status", error);
@@ -92,7 +110,7 @@ function Content() {
   const handleAction = async (action: ActionName) => {
     setPending((current) => ({ ...current, [action]: true }));
     try {
-      const result = await ACTIONS[action]();
+      const result = await withTimeout(ACTIONS[action](), `Timed out while running ${action}`);
       if (!result.ok) {
         toaster.toast({
           title: "mote",
