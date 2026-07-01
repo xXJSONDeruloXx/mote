@@ -1,7 +1,7 @@
 {
-  "name": "mote",
-  "version": "0.2.0",
-  "description": "A minimal HDMI-CEC volume remote for SteamOS via Decky Loader.",
+  "name": "cec-mote",
+  "version": "0.3.0",
+  "description": "A minimal HDMI-CEC remote and SteamOS sleep/wake setup assistant for Decky Loader.",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xXJSONDeruloXx/mote.git"
+    "url": "git+https://github.com/xXJSONDeruloXx/cec-mote.git"
   },
   "keywords": [
     "decky",
@@ -23,9 +23,9 @@
   "author": "xXJSONDeruloXx",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/xXJSONDeruloXx/mote/issues"
+    "url": "https://github.com/xXJSONDeruloXx/cec-mote/issues"
   },
-  "homepage": "https://github.com/xXJSONDeruloXx/mote#readme",
+  "homepage": "https://github.com/xXJSONDeruloXx/cec-mote#readme",
   "devDependencies": {
     "@decky/rollup": "^1.0.2",
     "@decky/ui": "^4.11.0",

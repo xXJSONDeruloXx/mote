@@ -1,8 +1,8 @@
-# mote
+# cec-mote
 
 <img width="548" height="443" alt="image" src="https://github.com/user-attachments/assets/ffae8a0b-2c81-4ffa-b153-d4028192968b" />
 
-`mote` is a Decky Loader plugin for SteamOS that now does two related jobs:
+`cec-mote` is a Decky Loader plugin for SteamOS that now does two related jobs:
 
 - sends HDMI-CEC volume commands through the built-in `cecd` D-Bus service
 - assists with installing, repairing, verifying, and uninstalling the `steamos-cec-bt-wake` sleep/wake setup from inside Decky
@@ -49,5 +49,5 @@ python -m unittest tests/test_main.py
 
 - The setup assistant bundles a copy of `steamos-cec-bt-wake.sh` under `assets/`.
 - The plugin uses Decky's standard `root` plugin flag so the backend can run install/verify/uninstall operations that require root.
-- `mote` still depends on SteamOS `cecd` for CEC control.
+- `cec-mote` still depends on SteamOS `cecd` for CEC control.
 - The setup assistant is intended for SteamOS systems running Decky Loader.

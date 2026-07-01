@@ -86,10 +86,10 @@ class Plugin:
 
     async def _main(self) -> None:
         self._ensure_action_lock()
-        decky.logger.info("mote backend starting")
+        decky.logger.info("cec-mote backend starting")
 
     async def _unload(self) -> None:
-        decky.logger.info("mote backend shutting down")
+        decky.logger.info("cec-mote backend shutting down")
 
     async def get_status(self) -> dict:
         try:

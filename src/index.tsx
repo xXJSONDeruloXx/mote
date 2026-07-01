@@ -150,7 +150,7 @@ function Content() {
       const nextStatus = await withTimeout(getStatus(), "Timed out while checking CEC status");
       setStatus(nextStatus);
     } catch (error) {
-      console.error("Failed to load mote status", error);
+      console.error("Failed to load cec-mote status", error);
       setStatus({
         ready: false,
         active: false,
@@ -213,7 +213,7 @@ function Content() {
       const result = await withTimeout(ACTIONS[action](), `Timed out while running ${action}`);
       if (!result.ok) {
         toaster.toast({
-          title: "mote",
+          title: "cec-mote",
           body: result.error ?? "CEC action failed",
         });
         await loadStatus();
@@ -221,7 +221,7 @@ function Content() {
     } catch (error) {
       console.error(`Failed to execute ${action}`, error);
       toaster.toast({
-        title: "mote",
+        title: "cec-mote",
         body: "Unable to reach the backend",
       });
       await loadStatus();
@@ -240,13 +240,13 @@ function Content() {
       );
       setSetupStatus(result);
       toaster.toast({
-        title: "mote",
+        title: "cec-mote",
         body: result.summary,
       });
     } catch (error) {
       console.error(`Failed to execute ${action}`, error);
       toaster.toast({
-        title: "mote",
+        title: "cec-mote",
         body: "Unable to reach the setup backend",
       });
     } finally {
@@ -394,8 +394,8 @@ function Content() {
 
 export default definePlugin(() => {
   return {
-    name: "mote",
-    titleView: <div className={staticClasses.Title}>mote</div>,
+    name: "cec-mote",
+    titleView: <div className={staticClasses.Title}>cec-mote</div>,
     content: <Content />,
     icon: <FaWrench />,
   };

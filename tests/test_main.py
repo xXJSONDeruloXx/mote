@@ -21,7 +21,7 @@ class _Logger:
         pass
 
 
-tmp_plugin_dir = tempfile.mkdtemp(prefix="mote-plugin-")
+tmp_plugin_dir = tempfile.mkdtemp(prefix="cec-mote-plugin-")
 os.makedirs(os.path.join(tmp_plugin_dir, "assets"), exist_ok=True)
 with open(os.path.join(tmp_plugin_dir, "assets", "steamos-cec-bt-wake.sh"), "w", encoding="utf-8") as handle:
     handle.write("#!/usr/bin/env bash\n")

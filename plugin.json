@@ -1,10 +1,10 @@
 {
-  "name": "mote",
+  "name": "cec-mote",
   "author": "xXJSONDeruloXx",
   "flags": ["root"],
   "api_version": 1,
   "publish": {
     "tags": ["utility", "cec", "audio", "root"],
-    "description": "A minimal HDMI-CEC volume remote for SteamOS."
+    "description": "A minimal HDMI-CEC remote and SteamOS sleep/wake setup assistant."
   }
 }
