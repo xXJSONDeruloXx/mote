@@ -5,6 +5,7 @@
   "api_version": 1,
   "publish": {
     "tags": ["utility", "cec", "audio", "root"],
-    "description": "A minimal HDMI-CEC remote and SteamOS sleep/wake setup assistant."
+    "description": "A minimal HDMI-CEC remote and SteamOS sleep/wake setup assistant.",
+    "image": "https://github.com/user-attachments/assets/4d79921d-6886-436a-afc7-0772105d844d"
   }
 }
